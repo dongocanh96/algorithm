@@ -20,10 +20,10 @@ int main() {
 
     for(i = 0; i < 1000 * 20 * 1000; i++) {
         unsigned long long int val = rand() % value;
-        fprintf(fptr, "%d ", val);
+        fprintf(fptr, "%d\n", val);
     }
 
     fclose(fptr);
-    cout << "numbers generated successfully !!";
+    cout << "numbers generated successfully !!\n";
     return 0;
 }

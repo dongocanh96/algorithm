@@ -22,11 +22,11 @@ func main() {
 
 	for i := range [20]int{} {
 		reader := make([]byte, chunkSize)
-		_, err := bufR.Read(reader)
+		rlen, err := bufR.Read(reader)
 		if err != nil {
 			panic(err)
 		}
-		byteSlice := bytes.Split(reader, []byte(" "))
+		byteSlice := bytes.Split(reader[0:rlen], []byte("\n"))
 		sliceInt := make([]int64, len(byteSlice))
 		for j := range byteSlice {
 			sliceInt[j], _ = strconv.ParseInt(string(byteSlice[j]), 10, 64)
@@ -47,8 +47,8 @@ func writeFile(i int, slice []int64) {
 	defer f.Close()
 
 	datawriter := bufio.NewWriter(f)
-	for _, data := range slice {
-		inputData := fmt.Sprintf("%v\n", data)
+	for j := range slice {
+		inputData := fmt.Sprintf("%v\n", slice[j])
 		_, _ = datawriter.WriteString(inputData)
 	}
 }
